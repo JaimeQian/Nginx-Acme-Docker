@@ -1,0 +1,29 @@
+version: '3.9'
+
+services:
+  nginx:
+    image: jaimeqian/nginx-acme:latest
+    container_name: nginx
+    restart: always
+    ports:
+      - 443:443
+      - 80:80
+    volumes:
+      - acmecerts:/acmecerts
+      - certs:/etc/nginx/certs
+      - vhost.d:/etc/nginx/vhost.d
+      - stream.d:/etc/nginx/stream.d
+      - wwwroot:/usr/share/nginx
+
+networks:
+  default:
+    name: myDockerNetwork
+    external: true
+
+volumes:
+  acmecerts:
+  certs:
+  wwwroot:
+  vhost.d:
+  stream.d:
+
